@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cập nhật thông tin đứt cáp quang biển</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .wrap {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+        }
+
+        #info {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            transform: translateY(-50%);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        .broken {
+            color: #F8485E;
+            font-size: 2em;
+        }
+
+        .no-broken {
+            color: #50CB93;
+            font-size: 2em;
+        }
+
+        .link {
+            text-decoration: none;
+            color: #F08FC0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrap">
+            <div id="info">
+                Đang cập nhật thông tin
+            </div>
+            <div class="footer">
+                Để đóng góp thông tin về tình hình đứt cáp quang, vui lòng chỉnh sửa thông tin trên <a class="link"
+                    href="https://github.com">Github</a> của dự án
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "./data.json");
+    xhttp.send();
+    const { data } = await xhttp.responseText;
+    const infoElement = document.getElementById('info');
+    if (data && data.broken) {
+        infoElement.innerHTML = '<div class="broken">Đang đứt cáp</div>';
+    }
+    if (data && !data.broken) {
+        infoElement.innerHTML = '<div class="no-broken">Không có đứt cáp</div>';
+    }
+</script>
+
+</html>
