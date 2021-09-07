@@ -74,7 +74,7 @@
     const xhttp = new XMLHttpRequest();
     xhttp.open("GET", "./data.json");
     xhttp.send();
-    const { data } = await xhttp.responseText;
+    const { data } = xhttp.responseText;
     const infoElement = document.getElementById('info');
     if (data && data.broken) {
         infoElement.innerHTML = '<div class="broken">Đang đứt cáp</div>';
